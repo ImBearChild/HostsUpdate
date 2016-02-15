@@ -1,0 +1,2 @@
+# HostsUpdate
+一个下载指定开源项目hosts文件并替换的Python脚本
