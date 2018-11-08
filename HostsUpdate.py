@@ -9,12 +9,12 @@
 # 使用方法：在终端定位到当前文件所在目录，执行 python HostsUpdate.py ，然后输入当前用户密码获取root权限更新hosts
 
 
-import urllib2
+import urllib.request
 import os
 import sys
 import platform
 
-print 'start update hosts'
+print('start update hosts')
 
 # 提升到root权限
 if os.geteuid():
@@ -25,7 +25,7 @@ if os.geteuid():
 print('Running at root privilege. Your euid is', os.geteuid())
 
 #hosts下载地址
-url = 'https://raw.githubusercontent.com/racaljk/hosts/master/hosts'
+url = 'https://raw.githubusercontent.com/googlehosts/hosts/master/hosts-files/hosts'
 
 # 不同的系统写入不同的目录
 s = platform.system()
@@ -37,15 +37,15 @@ elif s == 'Windows':
 elif s == 'Linux':
 	path = '/etc/hosts'
 
-print path
+print(path)
 
-f = urllib2.urlopen(url) 
-data = f.read()
+f = urllib.request.urlopen(url) 
+data = f.read().decode()
 fh = open(path, 'w') 
 fh.write(data)
 # 需要加入自定义的hosts，可以在这里编辑
 # fh.write('test1\ntest2')
 fh.close() 
 
-print 'update hosts success'
+print('update hosts success')
 
